@@ -4,12 +4,12 @@ name: Clair in CI DB
 # pushes it to app-studio registry
 
 on:
-  schedule:
-    - cron: '0 6 * * *'
+  pull_request:
+    types: [opened, reopened]
 
 env:
-  REGISTRY: quay.io/redhat-appstudio
-  IMAGE_NAME: clair-in-ci
+  REGISTRY: quay.io/jsztuka
+  IMAGE_NAME: tester-s
   LATEST_TAG: latest
   PREVIOUS_TAG: previous
 
@@ -31,8 +31,8 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.HACBS_TEST_QUAY_USER }}
-          password: ${{ secrets.HACBS_TEST_QUAY_TOKEN }}
+          username: jsztuka+roboto
+          password: 2LPIL4957NFLHJCNNS4D18K0GE740NCF3KU7HV0YI55M5LAGOK72YE5TC2MU6EVE
 
       - name: Pull-and-retag-image
         run: |
